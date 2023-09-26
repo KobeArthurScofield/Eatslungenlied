@@ -1,5 +1,5 @@
 [Unit]
-Description=Eatslungenlied Maintenance Dragon
+Description=Eatslungenlied Maintenance Dragon Wake up Alarm
 Documentation=https://github.com/KobeArthurScofield/Eatslungenlied/tree/main/docs/
 
 [Timer]
