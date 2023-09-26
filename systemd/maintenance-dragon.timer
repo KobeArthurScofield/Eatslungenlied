@@ -1,0 +1,14 @@
+[Unit]
+Description=Eatslungenlied Maintenance Dragon
+Documentation=https://github.com/KobeArthurScofield/Eatslungenlied/tree/main/docs/
+
+[Timer]
+# Patch Tuesday XD
+OnCalendar=Tuesday *-*-8..14 08:00:00 UTC
+AccuracySec=30s
+Unit=maintenance-dragon.service
+WakeSystem=yes
+Persistent=yes
+
+[Install]
+WantedBy=multi-user.target
