@@ -1,0 +1,11 @@
+[Unit]
+Description=Eatslungenlied Maintenance Dragon Watcher
+Documentation=https://github.com/KobeArthurScofield/Eatslungenlied/tree/main/docs/
+
+[Service]
+Type=oneshot
+ExecStart=+/opt/eatslungenlied/maintenance-dragon.sh
+User=root
+
+[Install]
+WantedBy=multi-user.target
