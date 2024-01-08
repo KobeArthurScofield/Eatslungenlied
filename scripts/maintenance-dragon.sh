@@ -90,7 +90,9 @@ for SCRIPT in "${BASE_DIR}/pre-maintenance-dragon"/*
 do
   case ${SCRIPT} in
     *.sh)
+      echo "Running ${SCRIPT}..."
       ${SCRIPT}
+      echo "${SCRIPT} completed with $?."
       ;;
   esac
 done
@@ -110,7 +112,9 @@ for SCRIPT in "${BASE_DIR}/post-maintenance-dragon"/*
 do
   case ${SCRIPT} in
     *.sh)
+      echo "Running ${SCRIPT}..."
       ${SCRIPT}
+      echo "${SCRIPT} completed with $?."
       ;;
   esac
 done
