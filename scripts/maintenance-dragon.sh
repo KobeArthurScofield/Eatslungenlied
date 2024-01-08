@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-BASE_DIR="/opt/eatslungenlied/"
+BASE_DIR="/opt/eatslungenlied"
 
 REBOOT_TIME="20:00"
 
