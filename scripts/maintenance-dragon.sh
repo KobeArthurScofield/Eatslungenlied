@@ -36,14 +36,14 @@ os_identify() {
     PACKAGE_MANAGEMENT_UPDATE='apt update'
     package_provide_tput='ncurses-bin'
   elif [[ "$(type -P dnf)" ]]; then
-    PACKAGE_MANAGEMENT_UPGRADE=''
+    PACKAGE_MANAGEMENT_UPGRADE='dnf -y upgrade'
     PACKAGE_MANAGEMENT_LISTUPDATE=''
-    PACKAGE_MANAGEMENT_UPDATE=''
+    PACKAGE_MANAGEMENT_UPDATE='dnf check-update'
     package_provide_tput='ncurses'
   elif [[ "$(type -P yum)" ]]; then
-    PACKAGE_MANAGEMENT_UPGRADE=''
+    PACKAGE_MANAGEMENT_UPGRADE='yum -y upgrade'
     PACKAGE_MANAGEMENT_LISTUPDATE=''
-    PACKAGE_MANAGEMENT_UPDATE=''
+    PACKAGE_MANAGEMENT_UPDATE='yum check-update'
     package_provide_tput='ncurses'
   elif [[ "$(type -P zypper)" ]]; then
     PACKAGE_MANAGEMENT_UPGRADE=''
@@ -51,7 +51,7 @@ os_identify() {
     PACKAGE_MANAGEMENT_UPDATE=''
     package_provide_tput='ncurses-utils'
   elif [[ "$(type -P pacman)" ]]; then
-    PACKAGE_MANAGEMENT_UPGRADE=''
+    PACKAGE_MANAGEMENT_UPGRADE='pacman -Syu'
     PACKAGE_MANAGEMENT_LISTUPDATE=''
     PACKAGE_MANAGEMENT_UPDATE=''
     package_provide_tput='ncurses'
@@ -64,6 +64,14 @@ os_identify() {
     echo "error: The script does not support the package manager in this operating system."
     exit 1
   fi
+}
+
+upgrade-packages() {
+  echo -e "====Checking packages updates==="
+  ${PACKAGE_MANAGEMENT_UPDATE
+  ${PACKAGE_MANAGEMENT_LISTUPDATE}
+  echo -e "====Install updates===="
+  ${PACKAGE_MANAGEMENT_UPGRADE}
 }
 
 check_if_running_as_root
@@ -83,13 +91,7 @@ do
 done
 
 # Maintenanace
-
-echo -e "====Checking packages updates==="
-${PACKAGE_MANAGEMENT_UPDATE}
-echo -e "====Update result===="
-${PACKAGE_MANAGEMENT_LISTUPDATE}
-echo -e "====Install updates===="
-${PACKAGE_MANAGEMENT_UPGRADE}
+upgrade-packages
 
 # Post-maintanence script here
 echo -e "====More jobs...===="
@@ -104,6 +106,6 @@ do
   esac
 done
 
-echo -e "====\nSetting machine auto restart\n===="
-shutdown --reboot ${REBOOT_TIME} "Preparing reboot procedure"
-echo -e "====\nCompleted\n===="
+echo -e "====Setting machine auto restart===="
+shutdown --reboot ${REBOOT_TIME} "Preparing maintenance reboot"
+echo -e "====Completed===="
