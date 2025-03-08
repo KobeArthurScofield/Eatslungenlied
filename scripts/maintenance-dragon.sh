@@ -68,7 +68,7 @@ os_identify() {
 
 upgrade-packages() {
   echo -e "====Checking packages updates==="
-  ${PACKAGE_MANAGEMENT_UPDATE
+  ${PACKAGE_MANAGEMENT_UPDATE}
   ${PACKAGE_MANAGEMENT_LISTUPDATE}
   echo -e "====Install updates===="
   ${PACKAGE_MANAGEMENT_UPGRADE}
